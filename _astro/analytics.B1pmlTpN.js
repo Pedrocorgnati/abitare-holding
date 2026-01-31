@@ -1,0 +1,1 @@
+function e(t,n){typeof window<"u"&&window.gtag&&window.gtag("event",t,n)}function o(t,n){e("outbound_click",{event_category:"outbound",event_label:n,destination:t})}function a(t,n){e("form_submit",{event_category:"engagement",form_name:t,subject:n})}export{a,o as t};

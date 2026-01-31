@@ -1,0 +1,1 @@
+import{t as o}from"./analytics.B1pmlTpN.js";function r(){document.querySelectorAll("[data-track-outbound]").forEach(e=>{e.addEventListener("click",t=>{const n=t.currentTarget.dataset.trackOutbound,a=t.currentTarget.textContent?.trim()||"";n&&o(n,a)})})}r();document.addEventListener("astro:page-load",r);
