@@ -1,0 +1,19 @@
+name = "abitare-contact"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://abitarebene.it"
+EMAIL_TO = "info@abitarebene.it"
+RATE_LIMIT_MAX = "3"
+RATE_LIMIT_WINDOW = "600"
+
+# KV Namespace for rate limiting
+# Create with: wrangler kv:namespace create RATE_LIMIT
+# Then add the id here:
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "YOUR_KV_NAMESPACE_ID"
+
+# Secrets (set via wrangler secret put RESEND_API_KEY)
+# RESEND_API_KEY

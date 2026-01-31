@@ -1,0 +1,22 @@
+---
+interface Props {
+  variant?: 'default' | 'elevated' | 'interactive';
+  class?: string;
+}
+
+const { variant = 'default', class: className = '' } = Astro.props;
+
+const baseClasses = 'bg-surface rounded-lg border border-border';
+
+const variantClasses = {
+  default: '',
+  elevated: 'shadow-md',
+  interactive: 'hover:border-accent/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-normal cursor-pointer',
+};
+
+const classes = [baseClasses, variantClasses[variant], className].join(' ');
+---
+
+<div class={classes}>
+  <slot />
+</div>

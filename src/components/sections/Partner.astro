@@ -1,0 +1,55 @@
+---
+import Button from '@components/ui/Button.astro';
+import { PARTNER_TYPES } from '@lib/constants';
+
+const icons: Record<string, string> = {
+  'building': `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />`,
+  'briefcase': `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`,
+  'megaphone': `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />`,
+  'code': `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />`,
+};
+---
+
+<section id="partner" class="py-20 lg:py-32 bg-background-alt">
+  <div class="container mx-auto px-4 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+        Diventa <span class="text-accent">Partner</span>
+      </h2>
+      <p class="text-text-secondary text-lg leading-relaxed">
+        Unisciti al nostro ecosistema e fai crescere il tuo business insieme a noi.
+        Collaborazioni su misura per ogni tipo di realtà.
+      </p>
+    </div>
+
+    <!-- Partnership Types -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      {PARTNER_TYPES.map((tipo, index) => (
+        <div
+          class="bg-surface/50 rounded-lg p-6 border border-border/50 text-center hover:border-accent/50 transition-all duration-300 animate-on-scroll"
+          style={`animation-delay: ${index * 100}ms;`}
+        >
+          <div class="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+            <svg
+              class="w-7 h-7 text-accent"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              set:html={icons[tipo.icon]}
+            />
+          </div>
+          <h3 class="font-semibold text-text-primary mb-2">{tipo.title}</h3>
+          <p class="text-text-secondary text-sm leading-relaxed">{tipo.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center animate-on-scroll">
+      <Button href="#contatti?subject=partnership" size="lg">
+        Proponi una partnership
+      </Button>
+    </div>
+  </div>
+</section>

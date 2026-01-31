@@ -1,0 +1,96 @@
+---
+import Header from '@components/layout/Header.astro';
+import MobileMenu from '@components/layout/MobileMenu.astro';
+import Footer from '@components/layout/Footer.astro';
+import StructuredData from '@components/seo/StructuredData.astro';
+import Analytics from '@components/seo/Analytics.astro';
+import '@styles/base.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage = '/og-image.jpg' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <title>{title}</title>
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="Abitare Holding" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0f0f0f" />
+
+    <!-- Structured Data -->
+    <StructuredData type="organization" />
+    <StructuredData type="website" />
+
+    <!-- Analytics -->
+    <Analytics />
+
+    <slot name="head" />
+  </head>
+
+  <body class="bg-background text-text-primary font-body antialiased">
+    <!-- Skip Link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-accent focus:text-background focus:rounded-lg focus:font-semibold focus:shadow-lg"
+    >
+      Vai al contenuto principale
+    </a>
+
+    <Header />
+    <MobileMenu />
+
+    <main id="main-content" class="pt-16 lg:pt-20">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      import { initScrollAnimations } from '@scripts/scroll-animations';
+      initScrollAnimations();
+    </script>
+
+    <slot name="scripts" />
+  </body>
+</html>

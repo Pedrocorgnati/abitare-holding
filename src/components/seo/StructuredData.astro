@@ -1,0 +1,62 @@
+---
+interface Props {
+  type: 'organization' | 'website';
+}
+
+const { type } = Astro.props;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Abitare Holding',
+  alternateName: 'Abitare Holding S.r.l.',
+  url: 'https://abitarebene.it',
+  logo: 'https://abitarebene.it/logo.png',
+  description: 'Holding italiana che riunisce Immobilitalia, Doveabitarebene e Servizi per Casa per trasformare il mercato immobiliare italiano.',
+  email: 'info@abitarebene.it',
+  telephone: '+393508751885',
+  sameAs: [
+    'https://instagram.com/abitareholding',
+    'https://facebook.com/abitareholding',
+    'https://linkedin.com/company/abitareholding',
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'IT',
+  },
+  subOrganization: [
+    {
+      '@type': 'Organization',
+      name: 'Immobilitalia',
+      url: 'https://immobilitalia.it',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Doveabitarebene',
+      url: 'https://doveabitarebene.it',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Servizi per Casa',
+      url: 'https://servizipercasa.it',
+    },
+  ],
+};
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Abitare Holding',
+  url: 'https://abitarebene.it',
+  description: 'Sito istituzionale di Abitare Holding, holding italiana del settore immobiliare.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Abitare Holding',
+  },
+  inLanguage: 'it-IT',
+};
+
+const data = type === 'organization' ? organization : website;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

@@ -1,0 +1,111 @@
+---
+import Button from '@components/ui/Button.astro';
+import { SUBSIDIARIES } from '@lib/constants';
+
+// Imagens para cada empresa
+const companyImages = [
+  '/images/ponto-3.png',
+  '/images/ponto-5.png', // Servizi per Casa
+  '/images/ponto-1.png', // Dove Abitare Bene
+];
+
+// Logos das empresas
+const companyLogos = [
+  '/images/immobilitalia.png',
+  '/images/servizipercasa.png',
+  '/images/dove-abitare-bene.png',
+];
+---
+
+<section id="aziende" class="py-20 lg:py-32 bg-background-alt">
+  <div class="container mx-auto px-4 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+        Le Nostre <span class="text-accent">Aziende</span>
+      </h2>
+      <p class="text-text-secondary text-lg leading-relaxed">
+        Tre realtà complementari che insieme coprono ogni esigenza del mercato immobiliare italiano.
+      </p>
+    </div>
+
+    <!-- Company Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {SUBSIDIARIES.map((company, index) => (
+        <article
+          class="group bg-surface rounded-xl overflow-hidden border border-border hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 animate-on-scroll"
+          style={`animation-delay: ${index * 150}ms;`}
+        >
+          <!-- Imagem da empresa -->
+          <div class="relative h-48 overflow-hidden">
+            <img
+              src={companyImages[index] || companyImages[0]}
+              alt={company.name}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-transparent"></div>
+          </div>
+
+          <div class="p-8 -mt-8 relative">
+            <!-- Logo -->
+            <div class="w-16 h-16 rounded-lg bg-white flex items-center justify-center mb-6 border-4 border-surface overflow-hidden">
+              <img
+                src={companyLogos[index]}
+                alt={`Logo ${company.name}`}
+                class="w-12 h-12 object-contain"
+              />
+            </div>
+
+            <!-- Company Name -->
+            <h3 class="font-display text-2xl font-semibold text-text-primary mb-2">
+              {company.name}
+            </h3>
+
+            <!-- Tagline -->
+            <p class="text-accent text-sm font-medium mb-4 italic">
+              {company.tagline}
+            </p>
+
+            <!-- Description -->
+            <p class="text-text-secondary text-sm leading-relaxed mb-6">
+              {company.description}
+            </p>
+
+            <!-- CTA -->
+            <Button
+              href={company.url}
+              variant="secondary"
+              class="w-full justify-center group-hover:bg-accent group-hover:text-background group-hover:border-accent"
+              data-track-outbound={company.url}
+            >
+              {company.cta}
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </Button>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { trackOutboundClick } from '@scripts/analytics';
+
+  function initOutboundTracking() {
+    document.querySelectorAll('[data-track-outbound]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const url = (e.currentTarget as HTMLElement).dataset.trackOutbound;
+        const text = (e.currentTarget as HTMLElement).textContent?.trim() || '';
+        if (url) {
+          trackOutboundClick(url, text);
+        }
+      });
+    });
+  }
+
+  initOutboundTracking();
+  document.addEventListener('astro:page-load', initOutboundTracking);
+</script>

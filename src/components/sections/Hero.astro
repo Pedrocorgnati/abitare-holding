@@ -1,0 +1,63 @@
+---
+import Button from '@components/ui/Button.astro';
+---
+
+<section id="hero" class="min-h-[90vh] flex items-center relative overflow-hidden">
+  <!-- Video Background -->
+  <div class="absolute inset-0 z-0">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/videos/hero.png"
+      class="w-full h-full object-cover"
+    >
+      <source src="/videos/hero.mp4" type="video/mp4" />
+    </video>
+    <!-- Overlay escuro para legibilidade -->
+    <div class="absolute inset-0 bg-background/95"></div>
+  </div>
+
+  <!-- Subtle gold accent gradient -->
+  <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-accent/5 to-transparent opacity-50 z-1"></div>
+
+  <div class="container mx-auto px-4 lg:px-8 relative z-10">
+    <div class="max-w-4xl">
+      <!-- Tagline -->
+      <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight mb-6 animate-on-scroll">
+        Il futuro dell'abitare,
+        <span class="text-accent">oggi.</span>
+      </h1>
+
+      <!-- Subtítulo -->
+      <p class="text-text-secondary text-lg md:text-xl lg:text-2xl leading-relaxed mb-10 max-w-2xl animate-on-scroll" style="animation-delay: 100ms;">
+        Abitare Holding riunisce tre realtà complementari per trasformare
+        il mercato immobiliare italiano: visibilità, informazione e servizi di qualità.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 animate-on-scroll" style="animation-delay: 200ms;">
+        <Button href="#aziende" size="lg">
+          Le Nostre Aziende
+        </Button>
+        <Button href="#contatti" variant="secondary" size="lg">
+          Contattaci
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
+    <svg class="w-6 h-6 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+    </svg>
+  </div>
+</section>
+
+<style>
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, var(--tw-gradient-from) 0%, var(--tw-gradient-to) 70%);
+  }
+</style>

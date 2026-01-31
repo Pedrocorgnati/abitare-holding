@@ -1,0 +1,82 @@
+---
+interface Props {
+  type?: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  name: string;
+  id?: string;
+  label?: string;
+  placeholder?: string;
+  required?: boolean;
+  error?: string;
+  options?: Array<{ value: string; label: string }>;
+  rows?: number;
+  maxlength?: number;
+  class?: string;
+}
+
+const {
+  type = 'text',
+  name,
+  id = name,
+  label,
+  placeholder,
+  required = false,
+  error,
+  options = [],
+  rows = 5,
+  maxlength,
+  class: className = '',
+} = Astro.props;
+
+const inputClasses = `w-full px-4 bg-background border rounded-lg text-text-primary placeholder-text-secondary/50 focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all ${error ? 'border-error' : 'border-border'}`;
+---
+
+<div class={`${className}`}>
+  {label && (
+    <label for={id} class="block text-sm font-medium text-text-primary mb-2">
+      {label}
+      {required && <span class="text-error ml-1">*</span>}
+    </label>
+  )}
+
+  {type === 'textarea' ? (
+    <textarea
+      id={id}
+      name={name}
+      required={required}
+      placeholder={placeholder}
+      rows={rows}
+      maxlength={maxlength}
+      class={`${inputClasses} py-3 resize-none`}
+    />
+  ) : type === 'select' ? (
+    <select
+      id={id}
+      name={name}
+      required={required}
+      class={`${inputClasses} h-12 appearance-none cursor-pointer`}
+    >
+      <option value="" disabled selected>
+        {placeholder || 'Seleziona...'}
+      </option>
+      {options.map((opt) => (
+        <option value={opt.value}>{opt.label}</option>
+      ))}
+    </select>
+  ) : (
+    <input
+      type={type}
+      id={id}
+      name={name}
+      required={required}
+      placeholder={placeholder}
+      maxlength={maxlength}
+      class={`${inputClasses} h-12`}
+    />
+  )}
+
+  {error && (
+    <p id={`${id}-error`} class="mt-1 text-sm text-error">
+      {error}
+    </p>
+  )}
+</div>

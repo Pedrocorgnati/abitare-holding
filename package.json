@@ -1,0 +1,21 @@
+{
+  "name": "abitare-holding",
+  "version": "1.0.0",
+  "description": "Sito istituzionale Abitare Holding",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": ["astro", "tailwind", "holding", "immobiliare"],
+  "author": "Abitare Holding",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.17.1",
+    "tailwindcss": "^3.4.19"
+  }
+}

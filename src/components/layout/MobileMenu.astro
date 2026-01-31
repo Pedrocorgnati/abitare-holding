@@ -1,0 +1,105 @@
+---
+import { NAV_ITEMS, COMPANY_INFO } from '@lib/constants';
+---
+
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-40 hidden"
+  aria-hidden="true"
+>
+  <!-- Overlay -->
+  <div
+    id="mobile-menu-overlay"
+    class="absolute inset-0 bg-background/80 backdrop-blur-sm"
+  ></div>
+
+  <!-- Menu Panel -->
+  <div
+    id="mobile-menu-panel"
+    class="absolute top-0 right-0 w-80 max-w-[85vw] h-full bg-surface border-l border-border transform translate-x-full transition-transform duration-300 ease-out"
+  >
+    <!-- Close Button -->
+    <div class="flex justify-end p-4">
+      <button
+        id="mobile-menu-close"
+        class="p-2 text-text-primary hover:text-accent transition-colors"
+        aria-label="Chiudi menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="px-6 py-4">
+      <ul class="space-y-4">
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="mobile-menu-link block text-lg text-text-primary hover:text-accent transition-colors py-2"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Contact Info -->
+    <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-border">
+      <p class="text-text-secondary text-sm mb-2">{COMPANY_INFO.email}</p>
+      <p class="text-text-secondary text-sm">{COMPANY_INFO.whatsapp}</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initMobileMenu() {
+    const menuButton = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    const menuPanel = document.getElementById('mobile-menu-panel');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const closeButton = document.getElementById('mobile-menu-close');
+    const menuLinks = document.querySelectorAll('.mobile-menu-link');
+
+    if (!menuButton || !menu || !menuPanel) return;
+
+    function openMenu() {
+      menu?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        menuPanel?.classList.remove('translate-x-full');
+      }, 10);
+      menuButton?.setAttribute('aria-expanded', 'true');
+      menu?.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMenu() {
+      menuPanel?.classList.add('translate-x-full');
+      setTimeout(() => {
+        menu?.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menu?.setAttribute('aria-hidden', 'true');
+    }
+
+    menuButton?.addEventListener('click', openMenu);
+    closeButton?.addEventListener('click', closeMenu);
+    overlay?.addEventListener('click', closeMenu);
+    menuLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu?.classList.contains('hidden')) {
+        closeMenu();
+      }
+    });
+  }
+
+  initMobileMenu();
+  document.addEventListener('astro:page-load', initMobileMenu);
+</script>

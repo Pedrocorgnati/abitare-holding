@@ -1,0 +1,90 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  lastUpdated: string;
+}
+
+const { title, description, lastUpdated } = Astro.props;
+---
+
+<BaseLayout title={`${title} | Abitare Holding`} description={description}>
+  <div class="py-20 lg:py-32">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <div class="mb-12">
+          <a href="/" class="inline-flex items-center gap-2 text-text-secondary hover:text-accent transition-colors mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Torna alla home
+          </a>
+          <h1 class="font-display text-3xl md:text-4xl font-bold text-text-primary mb-4">
+            {title}
+          </h1>
+          <p class="text-text-secondary">
+            Ultimo aggiornamento: {lastUpdated}
+          </p>
+        </div>
+
+        <!-- Content -->
+        <article class="legal-content">
+          <slot />
+        </article>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .legal-content :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .legal-content :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-content :global(p) {
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  .legal-content :global(ul) {
+    list-style-type: disc;
+    list-style-position: inside;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .legal-content :global(ul li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-content :global(a) {
+    color: var(--color-accent);
+  }
+
+  .legal-content :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  .legal-content :global(strong) {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+</style>
