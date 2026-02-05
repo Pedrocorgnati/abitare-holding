@@ -26,7 +26,7 @@ export const SUBSIDIARIES = [
     name: 'Servizi per Casa',
     tagline: 'I migliori professionisti, a portata di click.',
     description:
-      'La vetrina dei professionisti verificati: architetti, designer, imprese edili e artigiani.',
+      'La vetrina dei professionisti verificati: architetti, designer, imprese edili e artigiani, selezionati per esperienza e qualità.',
     url: 'https://servizipercasa.it',
     cta: 'Trova un professionista',
   },
