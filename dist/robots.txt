@@ -1,7 +1,0 @@
-# robots.txt for abitarebene.it
-
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://abitarebene.it/sitemap-index.xml
