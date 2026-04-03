@@ -2,8 +2,8 @@ export const COMPANY_INFO = {
   name: 'Abitare Holding',
   tagline: "Il futuro dell'abitare, oggi.",
   email: 'info@abitarebene.it',
-  whatsapp: '+39 350 875 1885',
-  whatsappLink: 'https://wa.me/393508751885',
+  whatsapp: '+39 378 017 8767',
+  whatsappLink: 'https://wa.me/393780178767',
   social: {
     instagram: 'https://instagram.com/abitareholding',
     facebook: 'https://facebook.com/abitareholding',
